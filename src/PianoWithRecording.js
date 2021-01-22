@@ -65,7 +65,7 @@ class PianoWithRecording extends React.Component {
       const span = document.createElement("span");
       // const img = document.createElement("img");
       const img = new Image();
-      img.src = require(noteType+".jpg");//img
+      img.src = require(noteType+".png");//img
       img.alt = "asdf";
       span.appendChild(img);
       text.appendChild(span);
