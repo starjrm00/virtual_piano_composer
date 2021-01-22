@@ -4,8 +4,6 @@
 
 .musicNotePrint {
     position: absolute;
-    overflow: scroll;
-    overflow-y: hidden;
     top:40px;
     left:50px;
 }
@@ -17,6 +15,10 @@
 
 .musicPaperContainer{
     position: relative;
+    height: 100%;
+    overflow:scroll;
+    overflow-y: hidden;
+    white-space:nowrap; 
 }
 
 .treble-clef {
