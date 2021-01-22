@@ -12,13 +12,14 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
 
 const noteRange = {
-  first: MidiNumbers.fromNote("c2"),
-  last: MidiNumbers.fromNote("f5")
+  first: MidiNumbers.fromNote("c4"),
+  last: MidiNumbers.fromNote("e6")
 };
 const keyboardShortcuts = KeyboardShortcuts.create({
-  firstNote: MidiNumbers.fromNote("c3"),
+  firstNote: noteRange.first,
   lastNote: noteRange.last,
   keyboardConfig: KeyboardShortcuts.HOME_ROW
+
 });
 
 class App extends React.Component {
