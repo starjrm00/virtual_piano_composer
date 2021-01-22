@@ -12,11 +12,11 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
 
 const noteRange = {
-  first: MidiNumbers.fromNote("c3"),
-  last: MidiNumbers.fromNote("f4")
+  first: MidiNumbers.fromNote("c2"),
+  last: MidiNumbers.fromNote("f5")
 };
 const keyboardShortcuts = KeyboardShortcuts.create({
-  firstNote: noteRange.first,
+  firstNote: MidiNumbers.fromNote("c3"),
   lastNote: noteRange.last,
   keyboardConfig: KeyboardShortcuts.HOME_ROW
 });
@@ -125,6 +125,9 @@ class App extends React.Component {
             )}
           />
         </div>
+        <h3>Music Notes You've Entered</h3>
+        <span className="musicNotePrint">
+        </span>
         <div className="mt-5">
           <button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>
