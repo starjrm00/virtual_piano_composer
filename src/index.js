@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import _ from "lodash";
+import _, { endsWith } from "lodash";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 
@@ -92,6 +92,10 @@ class App extends React.Component {
   };
 
   onClickClear = () => {
+    const span = document.querySelector(".musicNotePrint");
+    while (span.firstChild){
+      span.removeChild(span.firstChild);
+    }
     this.onClickStop();
     this.setRecording({
       events: [],
@@ -125,9 +129,16 @@ class App extends React.Component {
             )}
           />
         </div>
-        <h3>Music Notes You've Entered</h3>
-        <span className="musicNotePrint">
-        </span>
+        <div className="musicPaperContainer">
+          <h3>Music Notes You've Entered</h3>
+          <img className="treble-clef" src={require('./img/The_treble_clef.png')} alt='The treble clef'/>
+          <hr className="hr1"></hr>
+          <hr className="hr2"></hr>
+          <hr className="hr3"></hr>
+          <hr className="hr4"></hr>
+          <hr className="hr5"></hr>
+          <span className="musicNotePrint"></span>
+        </div>
         <div className="mt-5">
           <button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>
