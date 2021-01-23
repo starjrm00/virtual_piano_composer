@@ -1,11 +1,116 @@
 .musicNotePrint > span > img {
-    width:1.5em;
+    width:2.5em;
 }
 
 .musicNotePrint {
     position: absolute;
     top:40px;
     left:50px;
+}
+
+.musicNotePrint .C3 {
+    position: relative;
+    top:94px;
+}
+
+.musicNotePrint .D3 {
+    position: relative;
+    top:86px;
+}
+
+.musicNotePrint .E3 {
+    position: relative;
+    top:77px;
+}
+
+.musicNotePrint .F3 {
+    position: relative;
+    top:69px;
+}
+
+.musicNotePrint .G3 {
+    position: relative;
+    top:60px;
+}
+
+.musicNotePrint .A3 {
+    position: relative;
+    top:52px;
+}
+
+.musicNotePrint .B3 {
+    position: relative;
+    top:43px;
+}
+
+.musicNotePrint .C4 {
+    position: relative;
+    top:35px;
+}
+
+.musicNotePrint .D4 {
+    position: relative;
+    top:26px;
+}
+
+.musicNotePrint .E4 {
+    position: relative;
+    top:18px;
+}
+
+.musicNotePrint .F4 {
+    position: relative;
+    top:9px;
+}
+
+.musicNotePrint .G4 {
+    position: relative;
+    top:1px;
+}
+
+.musicNotePrint .A4 {
+    position: relative;
+    top:-8px;
+}
+
+.musicNotePrint .B4 {
+    position: relative;
+    top:-16px;
+}
+
+.musicNotePrint .C5 {
+    position: relative;
+    top:-25px;
+}
+
+.musicNotePrint .D5 {
+    position: relative;
+    top:-33px;
+}
+
+.musicNotePrint .E5 {
+    position: relative;
+    top:-42px;
+}
+
+.musicNotePrint .F5 {
+    position: relative;
+    top:-50px;
+}
+
+.musicNotePrint .G5 {
+    position: relative;
+    top:-59px;
+}
+
+.musicNotePrint .A5 {
+    position: relative;
+    top:-67px;
+}
+
+.musicNotePrint .B5 {
+    position: relative;
+    top:-76px;
 }
 
 .treble-clef{
