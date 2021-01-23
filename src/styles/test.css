@@ -1,117 +1,12 @@
 .musicNotePrint > span > img {
     /* width:2.5em; */
-    height:3.5em;
+    height:4.2em;
 }
 
 .musicNotePrint {
     position: absolute;
     top:40px;
     left:50px;
-}
-
-.sound_48 {
-    position: relative;
-    top:6.4em;
-}
-
-.sound_50 {
-    position: relative;
-    top:5.9em;
-}
-
-.sound_52 {
-    position: relative;
-    top:5.4em;
-}
-
-.sound_53 {
-    position: relative;
-    top:4.9em;
-}
-
-.sound_55 {
-    position: relative;
-    top:4.4em;
-}
-
-.sound_57 {
-    position: relative;
-    top:3.9em;
-}
-
-.sound_59 {
-    position: relative;
-    top:3.4em;
-}
-
-.sound_60 {
-    position: relative;
-    top:2.9em;
-}
-
-.sound_62 {
-    position: relative;
-    top:2.3em;
-}
-
-.sound_64 {
-    position: relative;
-    top:1.8em;
-}
-
-.sound_65 {
-    position: relative;
-    top:1.3em;
-}
-
-.sound_67 {
-    position: relative;
-    top:0.8em;
-}
-
-.sound_69 {
-    position: relative;
-    top:0.3em;
-}
-
-.sound_71 {
-    position: relative;
-    top:-0.2em;
-}
-
-.sound_72 {
-    position: relative;
-    top:-0.7em;
-}
-
-.sound_74 {
-    position: relative;
-    top:-1.2em;
-}
-
-.sound_76 {
-    position: relative;
-    top:-1.7em;
-}
-
-.sound_77 {
-    position: relative;
-    top:-2.2em;
-}
-
-.sound_79 {
-    position: relative;
-    top:-2.7em;
-}
-
-.sound_81 {
-    position: relative;
-    top:-3.2em;
-}
-
-.sound_83 {
-    position: relative;
-    top:-3.7em;
 }
 
 .treble-clef{
