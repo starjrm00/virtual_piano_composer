@@ -34,7 +34,7 @@ class PianoWithRecording extends React.Component {
   }
 
   onPlayNoteInput = (midiNumber) => {
-    if(this.state.notesRecorded === true){
+    if (this.state.notesRecorded === true){
       console.log(midiNumber);
       this.setState({
         notesRecorded: false
@@ -63,17 +63,33 @@ class PianoWithRecording extends React.Component {
     const newEvents = midiNumbers.map((midiNumber) => {
       // img 태그로 일일이 음표 찍어주기
       let positionToBeDrawn; //STRING
-      const text = document.querySelector(".musicNotePrint");
+      const parentSpan = document.querySelector(".musicNotePrint");
       const span = document.createElement("span");
       const img = new Image();
-      img.src = require(noteType+".png");
-      img.alt = "asdf";
+      img.src = require(noteType + ".png");
+      img.alt = `musical note(${noteType})`;
+      switch (noteType) {
+        case "./img/Whole_note" :
+          img.style.marginRight = "8em";
+          break;
+        case "./img/Half_note" :
+          img.style.marginRight = "4em";
+          break;
+        case "./img/Quarter_note" :
+          img.style.marginRight = "2em";
+          break;
+        case "./img/Eighth_note" :
+          img.style.marginRight = "1em";
+          break;
+        default: // "./img/Sixteenth_note" :
+          img.style.marginRight = "0em";
+      }
       // if(/* 어쩌구면 */){
       //   img.classList.add(positionToBeDrawn);
       // }
-      img.classList.add("sound_"+midiNumber)
+      img.classList.add(`sound_${midiNumber}`);
       span.appendChild(img);
-      text.appendChild(span);
+      parentSpan.appendChild(span);
 
       return {
         midiNumber,
