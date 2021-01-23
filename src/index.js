@@ -12,8 +12,8 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
 
 const noteRange = {
-  first: MidiNumbers.fromNote("c2"),
-  last: MidiNumbers.fromNote("b4")
+  first: MidiNumbers.fromNote("c3"),
+  last: MidiNumbers.fromNote("b5")
 };
 const keyboardShortcuts = KeyboardShortcuts.create({
   firstNote: noteRange.first,

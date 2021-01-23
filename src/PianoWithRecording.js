@@ -67,6 +67,49 @@ class PianoWithRecording extends React.Component {
       const img = new Image();
       img.src = require(noteType+".png");//img
       img.alt = "asdf";
+      if(48 == midiNumber){
+        img.className = "C3"
+      } else if(50 == midiNumber){
+        img.className = "D3"
+      } else if(52 == midiNumber){
+        img.className = "E3"
+      } else if(53 == midiNumber){
+        img.className = "F3"
+      } else if(55 == midiNumber){
+        img.className = "G3"
+      } else if(57 == midiNumber){
+        img.className = "A3"
+      } else if(59 == midiNumber){
+        img.className = "B3"
+      } else if(60 == midiNumber){
+        img.className = "C4"
+      } else if(62 == midiNumber){
+        img.className = "D4"
+      } else if(64 == midiNumber){
+        img.className = "E4"
+      } else if(65 == midiNumber){
+        img.className = "F4"
+      } else if(67 == midiNumber){
+        img.className = "G4"
+      } else if(69 == midiNumber){
+        img.className = "A4"
+      } else if(71 == midiNumber){
+        img.className = "B4"
+      } else if(72 == midiNumber){
+        img.className = "C5"
+      } else if(74 == midiNumber){
+        img.className = "D5"
+      } else if(76 == midiNumber){
+        img.className = "E5"
+      } else if(77 == midiNumber){
+        img.className = "F5"
+      } else if(79 == midiNumber){
+        img.className = "G5"
+      } else if(81 == midiNumber){
+        img.className = "A5"
+      } else if(83 == midiNumber){
+        img.className = "B5"
+      }
       span.appendChild(img);
       text.appendChild(span);
 
