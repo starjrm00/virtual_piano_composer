@@ -28,7 +28,8 @@ class App extends React.Component {
       events: [],
       currentTime: 0,
       currentEvents: [],
-      startTime: Date.now()
+      startTime: Date.now(),
+      selectedSound: ""
     }
   };
 
@@ -106,15 +107,52 @@ class App extends React.Component {
     });
   };
 
+  handleChange = (e) => {
+    this.setState({
+      ...this.state,
+      selectedSound: e.target.value
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`youve selected ${this.state.selectedSound}`)
+  }
+
   render() {
     return (
       <div>
         <h1 className="h3">react-piano recording + playback demo</h1>
+        <div>
+          
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Pick your sound: 
+          <select value={this.state.selectedSound} onChange={this.handleChange}>
+            <option value="">--Please choose an option--</option>
+            <option value="acoustic_grand_piano">acoustic_grand_piano</option>
+            <option value="accordion">accordion</option>
+            <option value="acoustic_bass">acoustic_bass</option>
+            <option value="acoustic_guitar_nylon">acoustic_guitar_nylon</option>
+            <option value="acoustic_guitar_steel">acoustic_guitar_steel</option>
+            <option value="agogo">agogo</option>
+            <option value="cello">cello</option>
+            <option value="piccolo">piccolo</option>
+            <option value="voice_oohs">voice_oohs</option>
+            <option value="whistle">whistle</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+
+      </form>
+        </div>
+
         <div className="mt-5">
           <SoundfontProvider
-            instrumentName="acoustic_grand_piano"
+            instrumentName={this.state.selectedSound}
             audioContext={audioContext}
             hostname={soundfontHostname}
+            // selectedSound={this.state.selectedSound}
             render={({ isLoading, playNote, stopNote }) => (
               <PianoWithRecording
                 recording={this.state.recording}
