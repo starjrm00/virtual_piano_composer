@@ -1,5 +1,6 @@
 .musicNotePrint > span > img {
-    width:2.5em;
+    /* width:2.5em; */
+    height:2.5em;
 }
 
 .musicNotePrint {
@@ -120,10 +121,10 @@
 
 .musicPaperContainer{
     position: relative;
-    height: 100%;
-    overflow:scroll;
-    overflow-y: hidden;
-    white-space:nowrap; 
+    /* height: 100%; */
+    /* overflow:scroll; */
+    /* overflow-y: hidden; */
+    /* white-space:nowrap; */
 }
 
 .treble-clef {
