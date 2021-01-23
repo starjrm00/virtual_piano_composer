@@ -61,13 +61,17 @@ class PianoWithRecording extends React.Component {
       return;
     }
     const newEvents = midiNumbers.map((midiNumber) => {
+      // img 태그로 일일이 음표 찍어주기
+      let positionToBeDrawn; //STRING
       const text = document.querySelector(".musicNotePrint");
       const span = document.createElement("span");
-      // const img = document.createElement("img");
       const img = new Image();
-      img.src = require(noteType+".png");//img
+      img.src = require(noteType+".png");
       img.alt = "asdf";
-      if(48 === midiNumber){
+      // if(/* 어쩌구면 */){
+      //   img.classList.add(positionToBeDrawn);
+      // }
+      if(48 == midiNumber){
         img.className = "C3"
       } else if(49 === midiNumber){
         img.className = "CS3"
