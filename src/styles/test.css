@@ -16,7 +16,7 @@
 
 .musicPaperContainer{
     position: relative;
-    height: 100em;
+    height: 20em;
     overflow:scroll;
     overflow-y: hidden;
     white-space:nowrap;
