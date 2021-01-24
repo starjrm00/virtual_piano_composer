@@ -5,9 +5,7 @@ import './styles/test.css';
 // const DURATION_UNIT = 0.2;
 // const DEFAULT_NOTE_DURATION = DURATION_UNIT;
 
-
-// const BLACK_KEYS_MIDI_NUMBER = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82];
-
+// 위치 조정
 let NoteHeight = {};
 NoteHeight[48] = 5.6
 NoteHeight[49] = 5.6
@@ -121,6 +119,8 @@ class PianoWithRecording extends React.Component {
       }
       img.style.position = "relative";
       img.style.top = `${NoteHeight[midiNumber]}em`;
+      img.style.marginBottom = `10em`;
+      
       switch (noteType) {
         case "./img/Whole_note" :
         case "./img/Whole_note_w_sharp" :

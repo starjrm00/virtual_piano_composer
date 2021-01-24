@@ -6,6 +6,7 @@ import "react-piano/dist/styles.css";
 
 import SoundfontProvider from "./SoundfontProvider";
 import PianoWithRecording from "./PianoWithRecording";
+import MusicPaper from "./MusicPaper";
 
 // webkitAudioContext fallback needed to support Safari
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -123,36 +124,32 @@ class App extends React.Component {
     return (
       <div>
         <h1 className="h3">react-piano recording + playback demo</h1>
-        <div>
           
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Pick your sound: 
-          <select value={this.state.selectedSound} onChange={this.handleChange}>
-            <option value="">--Please choose an option--</option>
-            <option value="acoustic_grand_piano">acoustic_grand_piano</option>
-            <option value="accordion">accordion</option>
-            <option value="acoustic_bass">acoustic_bass</option>
-            <option value="acoustic_guitar_nylon">acoustic_guitar_nylon</option>
-            <option value="acoustic_guitar_steel">acoustic_guitar_steel</option>
-            <option value="agogo">agogo</option>
-            <option value="cello">cello</option>
-            <option value="piccolo">piccolo</option>
-            <option value="voice_oohs">voice_oohs</option>
-            <option value="whistle">whistle</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-
-      </form>
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Pick your sound: 
+            <select value={this.state.selectedSound} onChange={this.handleChange}>
+              <option value="">--Please choose an option--</option>
+              <option value="acoustic_grand_piano">acoustic_grand_piano</option>
+              <option value="accordion">accordion</option>
+              <option value="acoustic_bass">acoustic_bass</option>
+              <option value="acoustic_guitar_nylon">acoustic_guitar_nylon</option>
+              <option value="acoustic_guitar_steel">acoustic_guitar_steel</option>
+              <option value="agogo">agogo</option>
+              <option value="cello">cello</option>
+              <option value="piccolo">piccolo</option>
+              <option value="voice_oohs">voice_oohs</option>
+              <option value="whistle">whistle</option>
+            </select>
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
 
         <div className="mt-5">
           <SoundfontProvider
             instrumentName={this.state.selectedSound}
             audioContext={audioContext}
             hostname={soundfontHostname}
-            // selectedSound={this.state.selectedSound}
             render={({ isLoading, playNote, stopNote }) => (
               <PianoWithRecording
                 recording={this.state.recording}
@@ -167,16 +164,7 @@ class App extends React.Component {
             )}
           />
         </div>
-        <div className="musicPaperContainer">
-          <h3>Music Notes You've Entered</h3>
-          <img className="treble-clef" src={require('./img/The_treble_clef.png')} alt='The treble clef'/>
-          <hr className="hr1"></hr>
-          <hr className="hr2"></hr>
-          <hr className="hr3"></hr>
-          <hr className="hr4"></hr>
-          <hr className="hr5"></hr>
-          <span className="musicNotePrint"></span>
-        </div>
+        <MusicPaper/>
         <div className="mt-5">
           <button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>
