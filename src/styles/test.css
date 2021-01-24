@@ -1,38 +1,23 @@
 .musicPaperContainer{
+  /* background-color: cornsilk; */
 	position: relative;
-	height: 20em;
-	/* overflow: scroll; */
-	/* overflow-y: hidden; */
-	/* white-space:nowrap; */
+	height: 21em;
+	overflow: scroll;
+	overflow-y: hidden;
+	white-space:nowrap;
+}
+.five-lines{
+  /* background-color: white; */
+  position: relative;
+  top: 6em;
+}
+.treble-clef{
+  position: absolute;
+  width: 2.2em;
 }
 .musicNotePrint {
 	position: absolute;
-	top:40px;
-	left:50px;
 }
 .musicNotePrint > span > img {
-	/* width:2.5em; */
 	height:4.2em;
-}
-.treble-clef{
-	/* width:7em; */
-	height:6em;
-	position: absolute;
-	top:40px;
-	left:0px;
-}
-.hr1{
-	line-height: 70px;
-}
-.hr2{
-	line-height: 80px;
-}
-.hr3{
-	line-height: 90px;
-}
-.hr4{
-	line-height: 100px;
-}
-.hr5{
-	line-height: 110px;
 }
