@@ -46,7 +46,8 @@ NoteHeight[83] = -4.6
 
 class PianoWithRecording extends React.Component {
   static defaultProps = {
-    notesRecorded: false
+    notesRecorded: false,
+    BPM: 120
   };
 
   state = {
@@ -57,16 +58,16 @@ class PianoWithRecording extends React.Component {
   };
 
   setnoteType = duration => {
-    if(duration >= 1.5){
+    if(duration >= 180/this.props.BPM){
       return "./img/Whole_note"
     }
-    if(duration >= 0.75){
+    if(duration >= 90/this.props.BPM){
       return "./img/Half_note"
     }
-    if(duration >= 0.375){
+    if(duration >= 45/this.props.BPM){
       return "./img/Quarter_note"
     }
-    if(duration >= 0.1875){
+    if(duration >= 22.5/this.props.BPM){
       return "./img/Eighth_note"
     }
     return "./img/Sixteenth_note"
@@ -75,6 +76,7 @@ class PianoWithRecording extends React.Component {
   onPlayNoteInput = (midiNumber) => {
     if (this.state.notesRecorded === true){
       console.log(midiNumber);
+      console.log(this.props.BPM)
       this.setState({
         notesRecorded: false
       });

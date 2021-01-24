@@ -31,7 +31,8 @@ class App extends React.Component {
       currentEvents: [],
       startTime: Date.now(),
       selectedSound: ""
-    }
+    },
+    BPM: 120
   };
 
   constructor(props) {
@@ -117,33 +118,61 @@ class App extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    alert(`youve selected ${this.state.selectedSound}`)
+    alert(`youve selected ${this.state.selectedSound}\nyour music BPM is ${this.state.BPM}`)
+  }
+
+  handleBPM = (e) => {
+    this.setState({
+      ...this.state,
+      BPM: e.target.value
+    })
   }
 
   render() {
     return (
       <div>
         <h1 className="h3">react-piano recording + playback demo</h1>
-          
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Pick your sound: 
-            <select value={this.state.selectedSound} onChange={this.handleChange}>
-              <option value="">--Please choose an option--</option>
-              <option value="acoustic_grand_piano">acoustic_grand_piano</option>
-              <option value="accordion">accordion</option>
-              <option value="acoustic_bass">acoustic_bass</option>
-              <option value="acoustic_guitar_nylon">acoustic_guitar_nylon</option>
-              <option value="acoustic_guitar_steel">acoustic_guitar_steel</option>
-              <option value="agogo">agogo</option>
-              <option value="cello">cello</option>
-              <option value="piccolo">piccolo</option>
-              <option value="voice_oohs">voice_oohs</option>
-              <option value="whistle">whistle</option>
-            </select>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Pick your sound: 
+              <select value={this.state.selectedSound} onChange={this.handleChange}>
+                <option value="">--Please choose an option--</option>
+                <option value="acoustic_grand_piano">acoustic_grand_piano</option>
+                <option value="accordion">accordion</option>
+                <option value="acoustic_bass">acoustic_bass</option>
+                <option value="acoustic_guitar_nylon">acoustic_guitar_nylon</option>
+                <option value="acoustic_guitar_steel">acoustic_guitar_steel</option>
+                <option value="agogo">agogo</option>
+                <option value="cello">cello</option>
+                <option value="piccolo">piccolo</option>
+                <option value="voice_oohs">voice_oohs</option>
+                <option value="whistle">whistle</option>
+              </select>
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              BPM: 
+              <select value={this.state.BPM} onChange={this.handleBPM}>
+                <option value="">--choose the speed of music--</option>
+                <option value="80">80</option>
+                <option value="90">90</option>
+                <option value="100">100</option>
+                <option value="110">110</option>
+                <option value="120">120</option>
+                <option value="130">130</option>
+                <option value="140">140</option>
+                <option value="150">150</option>
+                <option value="160">160</option>
+                <option value="170">170</option>
+              </select>
+            </label>
+            <input type="submit" value="BPM" />
+          </form>
+        </div>
 
         <div className="mt-5">
           <SoundfontProvider
@@ -159,6 +188,7 @@ class App extends React.Component {
                 playNote={playNote}
                 stopNote={stopNote}
                 disabled={isLoading}
+                BPM={this.state.BPM}
                 keyboardShortcuts={keyboardShortcuts}
               />
             )}
