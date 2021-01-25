@@ -154,9 +154,8 @@ class PianoWithRecording extends React.Component {
       return {
         midiNumber,
         time: (this.props.recording.currentTime - this.props.recording.startTime)/1000,
-        duration: duration,
-        noteType: noteType,
-        noteImg: noteType
+        duration,
+        noteType: noteType.slice(6)
       };
     });
     this.props.setRecording({
