@@ -111,92 +111,86 @@ class PianoWithRecording extends React.Component {
       const musicNotePrintSpan = document.querySelector(".musicNotePrint");
       const span = document.createElement("span");
       const img = new Image();
-      img.style.top = `${NoteHeight[midiNumber]}em`;
+
+      // 꼬리 방향이 아래일 경우 위치 조정하기
+      if (midiNumber >= 71 && noteType != "./img/Whole_note"){
+        img.style.top = `${NoteHeight[midiNumber]+3.15}em`;
+      } else {
+        img.style.top = `${NoteHeight[midiNumber]}em`;
+      }
+
+      // 오선 벗어나는 음표에 직선 그려주기
       if(81 <= midiNumber){
         const line = document.createElement("span");
-        line.style.position = "absolute"
-        line.style.backgroundColor = "rgb(59, 59, 59)"
-        line.style.borderRadius = "1px"
-        line.style.height = "2px"
-        line.style.width = "2em"
-        line.style.left = "2.6em"
-        line.style.top = "-7.2em"
-        span.appendChild(line)
+        line.classList.add("horizontal-line");
+        line.style.top = "-7.2em";
+        span.appendChild(line);
       }
       if(midiNumber <= 60){
         const line = document.createElement("span");
-        line.style.position = "absolute"
-        line.style.backgroundColor = "rgb(59, 59, 59)"
-        line.style.borderRadius = "1px"
-        line.style.height = "2px"
-        line.style.width = "2em"
-        line.style.left = "2.6em"
-        line.style.top = "-1.2em"
-        span.appendChild(line)
+        line.classList.add("horizontal-line");
+        line.style.top = "-1.2em";
+        span.appendChild(line);
       }
       if(midiNumber <= 57){
         const line = document.createElement("span");
-        line.style.position = "absolute"
-        line.style.backgroundColor = "rgb(59, 59, 59)"
-        line.style.borderRadius = "1px"
-        line.style.height = "2px"
-        line.style.width = "2em"
-        line.style.left = "2.6em"
-        line.style.top = "-0.2em"
-        span.appendChild(line)
+        line.classList.add("horizontal-line");
+        line.style.top = "-0.2em";
+        span.appendChild(line);
       }
       if(midiNumber <= 53){
         const line = document.createElement("span");
-        line.style.position = "absolute"
-        line.style.backgroundColor = "rgb(59, 59, 59)"
-        line.style.borderRadius = "1px"
-        line.style.height = "2px"
-        line.style.width = "2em"
-        line.style.left = "2.6em"
-        line.style.top = "0.8em"
-        span.appendChild(line)
+        line.classList.add("horizontal-line");
+        line.style.top = "0.8em";
+        span.appendChild(line);
       }
       if(midiNumber <= 50){
         const line = document.createElement("span");
-        line.style.position = "absolute"
-        line.style.backgroundColor = "rgb(59, 59, 59)"
-        line.style.borderRadius = "1px"
-        line.style.height = "2px"
-        line.style.width = "2em"
-        line.style.left = "2.6em"
-        line.style.top = "1.8em"
-        span.appendChild(line)
+        line.classList.add("horizontal-line");
+        line.style.top = "1.8em";
+        span.appendChild(line);
       }
+      // 검은 건반일 경우 앞에 샾 붙여주기 && 음표 꼬리 방향 정해주기
       isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
       if (isBlackKey) {
-        img.src = require(`${noteType}_w_sharp.png`);
-        img.alt = `musical note with sharp(${noteType})`;
+        if (midiNumber >= 71 && noteType != "./img/Whole_note") {
+          img.src = require(`${noteType}_w_sharp_stem_down.png`);
+          img.alt = `musical note with its stem facing down and with sharp(${noteType})`;
+        } else {
+          img.src = require(`${noteType}_w_sharp.png`);
+          img.alt = `musical note with sharp(${noteType})`;
+        }
       } else {
-        img.src = require(`${noteType}.png`);
-        img.alt = `musical note(${noteType})`;
+        if (midiNumber >= 71 && noteType != "./img/Whole_note") {
+          img.src = require(`${noteType}_stem_down.png`);
+          img.alt = `musical note with its stem facing down(${noteType})`;
+        } else {
+          img.src = require(`${noteType}.png`);
+          img.alt = `musical note(${noteType})`;
+        }
       }
-
+      // 음표 길이에 따라오는 오른쪽 마진 정해주기
       switch (noteType) {
         case "./img/Whole_note" :
-        case "./img/Whole_note_w_sharp" :
           img.style.marginRight = "8em";
           break;
         case "./img/Half_note" :
-        case "./img/Half_note_w_sharp" :
           img.style.marginRight = "4em";
           break;
         case "./img/Quarter_note" :
-        case "./img/Quarter_note_w_sharp" :
           img.style.marginRight = "2em";
           break;
         case "./img/Eighth_note" :
-        case "./img/Eighth_note_w_sharp" :
           img.style.marginRight = "1em";
           break;
-        default: // "./img/Sixteenth_note" :
-        // "./img/Sixteenth_note_w_sharp" :
-          img.style.marginRight = "0em";
+        default: // Sixteenth_note && Sixteenth_note_w_sharp:
+          if(71 <= midiNumber){
+            img.style.marginRight = "0.8em"
+          }else{
+            img.style.marginRight = "0em";
+          }
       }
+      
       span.appendChild(img);
       musicNotePrintSpan.appendChild(span);
 

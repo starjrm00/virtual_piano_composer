@@ -131,31 +131,6 @@ class App extends React.Component {
     fr.readAsText(e.target.files[0]);
   }
 
-  // uploadChange = (file) => {
-  //   var el = file.parentNode.parentNode.getElementByTagName("*");
-  //   for (var i = 0; i < el.length; i++) {
-  //     var node = el[i];
-  //     if (node.className == "file-text") {
-  //       node.innerHTML = file.value;
-  //       break;
-  //     }
-  //   }
-  //   console.log(el)
-  // }
-
-  // fileChangedHandler = (e) => {
-  //   const files = e.target.result;
-  //   var reader = new FileReader();
-  //   reader.onload = event => console.log(files)
-  //   reader.onerror = error => reject(error)
-  //   console.log(typeof(files))
-  //   this.setState({
-  //     ...this.state,
-  //     events: files
-  //   })
-  //   console.log(files)
-  // };
-
   handleChange = (e) => {
     this.setState({
       ...this.state,
@@ -248,17 +223,6 @@ class App extends React.Component {
           <button onClick={this.onClickClear}>Clear</button>
           <button onClick={this.onClickSave}>Save</button>
           <input type="file" onChange={this.onFileInput}/>
-          {/* <div class = "box">
-            <span class="filetype">
-              <span class="file-text"></span>
-              <span class="file-btn">찾아보기</span>
-              <span class="file-select">
-                <input type="file" class="input-file" size="3" onchange="uploadChange(this);"/>
-              </span>
-            </span>
-          </div> */}
-          {/* <button onClick={this.onClickUpload}>Upload</button> */}
-          {/* <input type = "file" onChange = {this.fileChangedHandler}/> */}
         </div>
         <div className="mt-5">
           <strong>Recorded notes</strong>
