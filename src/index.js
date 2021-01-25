@@ -79,6 +79,7 @@ class App extends React.Component {
         }, time * 1000)
       );
     });
+    console.log(this.state.recording)
     // Stop at the end
     setTimeout(() => {
       this.onClickStop();
@@ -125,7 +126,6 @@ class App extends React.Component {
         ...this.state.recording,
         events: JSON.parse(musicInString)
       })
-      
       this.onClickPlay();
     };
     fr.readAsText(e.target.files[0]);
