@@ -112,11 +112,6 @@ class PianoWithRecording extends React.Component {
       const span = document.createElement("span");
       const img = new Image();
       img.style.top = `${NoteHeight[midiNumber]}em`;
-      // const line = document.createElement("span");
-      // isLineNeeded = KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE.includes(midiNumber);
-      // if (isLineNeeded) {
-      //   line.classList.add("horizontal-line");
-      // }
       if(81 <= midiNumber){
         const line = document.createElement("span");
         line.style.position = "absolute"
@@ -203,7 +198,6 @@ class PianoWithRecording extends React.Component {
           img.style.marginRight = "0em";
       }
       span.appendChild(img);
-      // span.appendChild(line);
       musicNotePrintSpan.appendChild(span);
 
       return {
