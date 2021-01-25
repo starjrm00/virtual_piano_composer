@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import _, { endsWith } from "lodash";
+import _, { endsWith, reject } from "lodash";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 
 import SoundfontProvider from "./SoundfontProvider";
 import PianoWithRecording from "./PianoWithRecording";
 import MusicPaper from "./MusicPaper";
+import FileSaver from "file-saver";
 
 // webkitAudioContext fallback needed to support Safari
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -109,6 +110,36 @@ class App extends React.Component {
     });
   };
 
+  onClickSave = () => {
+    var tmp = JSON.stringify(this.state.recording.events)
+    FileSaver.saveAs(new Blob([tmp]), "real_tmp.txt")
+  };
+
+  // uploadChange = (file) => {
+  //   var el = file.parentNode.parentNode.getElementByTagName("*");
+  //   for (var i = 0; i < el.length; i++) {
+  //     var node = el[i];
+  //     if (node.className == "file-text") {
+  //       node.innerHTML = file.value;
+  //       break;
+  //     }
+  //   }
+  //   console.log(el)
+  // }
+
+  // fileChangedHandler = (e) => {
+  //   const files = e.target.result;
+  //   var reader = new FileReader();
+  //   reader.onload = event => console.log(files)
+  //   reader.onerror = error => reject(error)
+  //   console.log(typeof(files))
+  //   this.setState({
+  //     ...this.state,
+  //     events: files
+  //   })
+  //   console.log(files)
+  // };
+
   handleChange = (e) => {
     this.setState({
       ...this.state,
@@ -184,7 +215,7 @@ class App extends React.Component {
                 recording={this.state.recording}
                 setRecording={this.setRecording}
                 noteRange={noteRange}
-                width={300}
+                width={1000}
                 playNote={playNote}
                 stopNote={stopNote}
                 disabled={isLoading}
@@ -199,6 +230,18 @@ class App extends React.Component {
           <button onClick={this.onClickPlay}>Play</button>
           <button onClick={this.onClickStop}>Stop</button>
           <button onClick={this.onClickClear}>Clear</button>
+          <button onClick={this.onClickSave}>Save</button>
+          {/* <div class = "box">
+            <span class="filetype">
+              <span class="file-text"></span>
+              <span class="file-btn">찾아보기</span>
+              <span class="file-select">
+                <input type="file" class="input-file" size="3" onchange="uploadChange(this);"/>
+              </span>
+            </span>
+          </div> */}
+          {/* <button onClick={this.onClickUpload}>Upload</button> */}
+          {/* <input type = "file" onChange = {this.fileChangedHandler}/> */}
         </div>
         <div className="mt-5">
           <strong>Recorded notes</strong>
