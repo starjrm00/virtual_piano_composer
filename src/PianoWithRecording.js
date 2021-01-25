@@ -5,8 +5,7 @@ import './styles/test.css';
 // const DURATION_UNIT = 0.2;
 // const DEFAULT_NOTE_DURATION = DURATION_UNIT;
 
-// 위치 조정
-//0.5가 한음 차이 정도라고 보면 될 듯
+// 위치 조정(em 기준, 0.5가 한음 차이)
 let NoteHeight = {};
 NoteHeight[48] = 5.1
 NoteHeight[49] = 5.1
@@ -44,6 +43,9 @@ NoteHeight[80] = -4.1
 NoteHeight[81] = -4.6
 NoteHeight[82] = -4.6
 NoteHeight[83] = -5.1
+
+const BLACK_KEYS_MIDI_NUMBER = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82];
+const KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE = [50, 51, 53, 54, 57, 58, 60, 61, 81, 82];
 
 class PianoWithRecording extends React.Component {
   static defaultProps = {
@@ -100,8 +102,7 @@ class PianoWithRecording extends React.Component {
 
   recordNotes = (midiNumbers, duration, noteType) => {
     let isBlackKey;
-    const BLACK_KEYS_MIDI_NUMBER = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82];
-    
+    let isLineNeeded;
     if (this.props.recording.mode !== "RECORDING") {
       return;
     }
@@ -109,8 +110,13 @@ class PianoWithRecording extends React.Component {
       // img 태그로 일일이 음표 찍어주기
       const musicNotePrintSpan = document.querySelector(".musicNotePrint");
       const span = document.createElement("span");
+      span.style.top = `${NoteHeight[midiNumber]}em`;
       const img = new Image();
-
+      const line = document.createElement("span");
+      isLineNeeded = KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE.includes(midiNumber);
+      if (isLineNeeded) {
+        line.classList.add("horizontal-line");
+      }
       isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
       if (isBlackKey) {
         img.src = require(`${noteType}_w_sharp.png`);
@@ -119,11 +125,7 @@ class PianoWithRecording extends React.Component {
         img.src = require(`${noteType}.png`);
         img.alt = `musical note(${noteType})`;
       }
-      img.style.position = `relative`;
-      img.style.left = `3em`;
-      img.style.top = `${NoteHeight[midiNumber]}em`;
-      img.style.marginBottom = `10em`;
-      
+
       switch (noteType) {
         case "./img/Whole_note" :
         case "./img/Whole_note_w_sharp" :
@@ -146,6 +148,7 @@ class PianoWithRecording extends React.Component {
           img.style.marginRight = "0em";
       }
       span.appendChild(img);
+      span.appendChild(line);
       musicNotePrintSpan.appendChild(span);
 
       return {
