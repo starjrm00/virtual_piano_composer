@@ -115,7 +115,6 @@ class App extends React.Component {
     const tmp = JSON.stringify(this.state.recording.events);
     const blob = new Blob([tmp]);
     FileSaver.saveAs(blob, "real_tmp.txt");
-    console.log(blob);
   };
 
   onFileInput = async (e) => {
@@ -124,10 +123,10 @@ class App extends React.Component {
     fr.onload = async (e) => {
       const musicInString = (e.target.result);
       this.setRecording({
-        ...this.recording,
+        ...this.state.recording,
         events: JSON.parse(musicInString)
       })
-      console.log(this.state.recording)
+      this.onClickPlay();
     };
     fr.readAsText(e.target.files[0]);
   }
