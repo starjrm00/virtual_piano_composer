@@ -110,12 +110,67 @@ class PianoWithRecording extends React.Component {
       // img 태그로 일일이 음표 찍어주기
       const musicNotePrintSpan = document.querySelector(".musicNotePrint");
       const span = document.createElement("span");
-      span.style.top = `${NoteHeight[midiNumber]}em`;
       const img = new Image();
-      const line = document.createElement("span");
-      isLineNeeded = KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE.includes(midiNumber);
-      if (isLineNeeded) {
-        line.classList.add("horizontal-line");
+      img.style.top = `${NoteHeight[midiNumber]}em`;
+      // const line = document.createElement("span");
+      // isLineNeeded = KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE.includes(midiNumber);
+      // if (isLineNeeded) {
+      //   line.classList.add("horizontal-line");
+      // }
+      if(81 <= midiNumber){
+        const line = document.createElement("span");
+        line.style.position = "absolute"
+        line.style.backgroundColor = "rgb(59, 59, 59)"
+        line.style.borderRadius = "1px"
+        line.style.height = "2px"
+        line.style.width = "2em"
+        line.style.left = "2.6em"
+        line.style.top = "-7.2em"
+        span.appendChild(line)
+      }
+      if(midiNumber <= 60){
+        const line = document.createElement("span");
+        line.style.position = "absolute"
+        line.style.backgroundColor = "rgb(59, 59, 59)"
+        line.style.borderRadius = "1px"
+        line.style.height = "2px"
+        line.style.width = "2em"
+        line.style.left = "2.6em"
+        line.style.top = "-1.2em"
+        span.appendChild(line)
+      }
+      if(midiNumber <= 57){
+        const line = document.createElement("span");
+        line.style.position = "absolute"
+        line.style.backgroundColor = "rgb(59, 59, 59)"
+        line.style.borderRadius = "1px"
+        line.style.height = "2px"
+        line.style.width = "2em"
+        line.style.left = "2.6em"
+        line.style.top = "-0.2em"
+        span.appendChild(line)
+      }
+      if(midiNumber <= 53){
+        const line = document.createElement("span");
+        line.style.position = "absolute"
+        line.style.backgroundColor = "rgb(59, 59, 59)"
+        line.style.borderRadius = "1px"
+        line.style.height = "2px"
+        line.style.width = "2em"
+        line.style.left = "2.6em"
+        line.style.top = "0.8em"
+        span.appendChild(line)
+      }
+      if(midiNumber <= 50){
+        const line = document.createElement("span");
+        line.style.position = "absolute"
+        line.style.backgroundColor = "rgb(59, 59, 59)"
+        line.style.borderRadius = "1px"
+        line.style.height = "2px"
+        line.style.width = "2em"
+        line.style.left = "2.6em"
+        line.style.top = "1.8em"
+        span.appendChild(line)
       }
       isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
       if (isBlackKey) {
@@ -148,7 +203,7 @@ class PianoWithRecording extends React.Component {
           img.style.marginRight = "0em";
       }
       span.appendChild(img);
-      span.appendChild(line);
+      // span.appendChild(line);
       musicNotePrintSpan.appendChild(span);
 
       return {
