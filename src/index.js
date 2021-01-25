@@ -79,6 +79,7 @@ class App extends React.Component {
         }, time * 1000)
       );
     });
+    console.log(this.state.recording)
     // Stop at the end
     setTimeout(() => {
       this.onClickStop();
@@ -122,10 +123,11 @@ class App extends React.Component {
     const fr = new FileReader();
     fr.onload = async (e) => {
       const musicInString = (e.target.result);
-      this.setState({
-        ...this.state,
-        events: musicInString
+      this.setRecording({
+        ...this.recording,
+        events: JSON.parse(musicInString)
       })
+      console.log(this.state.recording)
     };
     fr.readAsText(e.target.files[0]);
   }
