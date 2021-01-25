@@ -111,9 +111,24 @@ class App extends React.Component {
   };
 
   onClickSave = () => {
-    var tmp = JSON.stringify(this.state.recording.events)
-    FileSaver.saveAs(new Blob([tmp]), "real_tmp.txt")
+    const tmp = JSON.stringify(this.state.recording.events);
+    const blob = new Blob([tmp]);
+    FileSaver.saveAs(blob, "real_tmp.txt");
+    console.log(blob);
   };
+
+  onFileInput = async (e) => {
+    e.preventDefault();
+    const fr = new FileReader();
+    fr.onload = async (e) => {
+      const musicInString = (e.target.result);
+      this.setState({
+        ...this.state,
+        events: musicInString
+      })
+    };
+    fr.readAsText(e.target.files[0]);
+  }
 
   // uploadChange = (file) => {
   //   var el = file.parentNode.parentNode.getElementByTagName("*");
@@ -231,6 +246,7 @@ class App extends React.Component {
           <button onClick={this.onClickStop}>Stop</button>
           <button onClick={this.onClickClear}>Clear</button>
           <button onClick={this.onClickSave}>Save</button>
+          <input type="file" onChange={this.onFileInput}/>
           {/* <div class = "box">
             <span class="filetype">
               <span class="file-text"></span>
