@@ -115,9 +115,15 @@ class PianoWithRecording extends React.Component {
           const span = document.createElement("span");
           const img = new Image();
           if(4000 <= rest_time){
-
+            img.src = require(`./img/rest-whole-note.png`);
+            img.alt = `rest-whole-note`;
+            img.style.marginRight = "0.7em"
+            img.style.top = "0.5em"
           }else if(2000 <= rest_time){
-
+            img.src = require(`./img/rest-half-note.png`);
+            img.alt = `rest-half-note`;
+            img.style.marginRight = "0.7em"
+            img.style.top = "-0.5em"
           }else{
             img.src = require(`./img/rest-quarter-note.png`);
             img.alt = `rest-quarter-note`;
