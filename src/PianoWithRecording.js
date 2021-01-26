@@ -45,7 +45,6 @@ NoteHeight[82] = -4.6
 NoteHeight[83] = -5.1
 
 const BLACK_KEYS_MIDI_NUMBER = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82];
-// const KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE = [50, 51, 53, 54, 57, 58, 60, 61, 81, 82];
 
 class PianoWithRecording extends React.Component {
   static defaultProps = {
@@ -134,7 +133,6 @@ class PianoWithRecording extends React.Component {
         }
       }
       console.log(midiNumber);
-      console.log(this.props.BPM)
       this.setState({
         notesRecorded: false
       });
@@ -158,17 +156,19 @@ class PianoWithRecording extends React.Component {
     }
   };
 
-  recordNotes = (midiNumbers, duration, noteType) => {
+  paintNote = (midiNumber, noteType) => {
     let isBlackKey;
-    let isLineNeeded;
-    if (this.props.recording.mode !== "RECORDING") {
-      return;
+    // img 태그로 일일이 음표 찍어주기
+    const musicNotePrintSpan = document.querySelector(".musicNotePrint");
+    const span = document.createElement("span");
+    const img = new Image();
+
+    // 꼬리 방향이 아래일 경우 위치 조정하기
+    if (midiNumber >= 71 && noteType !== "./img/Whole_note"){
+      img.style.top = `${NoteHeight[midiNumber]+3.15}em`;
+    } else {
+      img.style.top = `${NoteHeight[midiNumber]}em`;
     }
-    const newEvents = midiNumbers.map((midiNumber) => {
-      // img 태그로 일일이 음표 찍어주기
-      const musicNotePrintSpan = document.querySelector(".musicNotePrint");
-      const span = document.createElement("span");
-      const img = new Image();
       isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
 
       if(noteType.slice(-1) === 'D'){
@@ -195,93 +195,114 @@ class PianoWithRecording extends React.Component {
       } else {
         img.style.top = `${NoteHeight[midiNumber]}em`;
       }
-
-      // 오선 벗어나는 음표에 직선 그려주기
-      if(81 <= midiNumber){
-        const line = document.createElement("span");
-        line.classList.add("horizontal-line");
-        line.style.top = "-7.2em";
-        span.appendChild(line);
-      }
-      if(midiNumber <= 60){
-        const line = document.createElement("span");
-        line.classList.add("horizontal-line");
-        line.style.top = "-1.2em";
-        span.appendChild(line);
-      }
-      if(midiNumber <= 57){
-        const line = document.createElement("span");
-        line.classList.add("horizontal-line");
-        line.style.top = "-0.2em";
-        span.appendChild(line);
-      }
-      if(midiNumber <= 53){
-        const line = document.createElement("span");
-        line.classList.add("horizontal-line");
-        line.style.top = "0.8em";
-        span.appendChild(line);
-      }
-      if(midiNumber <= 50){
-        const line = document.createElement("span");
-        line.classList.add("horizontal-line");
-        line.style.top = "1.8em";
-        span.appendChild(line);
-      }
-      // 검은 건반일 경우 앞에 샾 붙여주기 && 음표 꼬리 방향 정해주기
-      if (isBlackKey) {
-        if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
-          img.src = require(`${noteType}_w_sharp_stem_down.png`);
-          img.alt = `musical note with its stem facing down and with sharp(${noteType})`;
-        } else {
-          img.src = require(`${noteType}_w_sharp.png`);
-          img.alt = `musical note with sharp(${noteType})`;
-        }
+    // 오선 벗어나는 음표에 직선 그려주기
+    if(81 <= midiNumber){
+      const line = document.createElement("span");
+      line.classList.add("horizontal-line");
+      line.style.top = "-7.2em";
+      span.appendChild(line);
+    }
+    if(midiNumber <= 60){
+      const line = document.createElement("span");
+      line.classList.add("horizontal-line");
+      line.style.top = "-1.2em";
+      span.appendChild(line);
+    }
+    if(midiNumber <= 57){
+      const line = document.createElement("span");
+      line.classList.add("horizontal-line");
+      line.style.top = "-0.2em";
+      span.appendChild(line);
+    }
+    if(midiNumber <= 53){
+      const line = document.createElement("span");
+      line.classList.add("horizontal-line");
+      line.style.top = "0.8em";
+      span.appendChild(line);
+    }
+    if(midiNumber <= 50){
+      const line = document.createElement("span");
+      line.classList.add("horizontal-line");
+      line.style.top = "1.8em";
+      span.appendChild(line);
+    }
+    // 검은 건반일 경우 앞에 샾 붙여주기 && 음표 꼬리 방향 정해주기
+    if (isBlackKey) {
+      if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
+        img.src = require(`${noteType}_w_sharp_stem_down.png`);
+        img.alt = `musical note with its stem facing down and with sharp(${noteType})`;
       } else {
-        if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
-          img.src = require(`${noteType}_stem_down.png`);
-          img.alt = `musical note with its stem facing down(${noteType})`;
-        } else {
-          img.src = require(`${noteType}.png`);
-          img.alt = `musical note(${noteType})`;
-        }
+        img.src = require(`${noteType}_w_sharp.png`);
+        img.alt = `musical note with sharp(${noteType})`;
       }
-      // 음표 길이에 따라오는 오른쪽 마진 정해주기
-      switch (noteType) {
-        case "./img/Whole_note" :
-          img.style.marginRight = "8em";
-          break;
-        case "./img/Half_note" :
-          img.style.marginRight = "4em";
-          break;
-        case "./img/Quarter_note" :
-          img.style.marginRight = "2em";
-          break;
-        case "./img/Eighth_note" :
-          img.style.marginRight = "1em";
-          break;
-        default: // Sixteenth_note && Sixteenth_note_w_sharp:
-          if(71 <= midiNumber){
-            img.style.marginRight = "0.8em"
-          }else{
-            img.style.marginRight = "0em";
-          }
+    } else {
+      if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
+        img.src = require(`${noteType}_stem_down.png`);
+        img.alt = `musical note with its stem facing down(${noteType})`;
+      } else {
+        img.src = require(`${noteType}.png`);
+        img.alt = `musical note(${noteType})`;
+      }
+    }
+    // 음표 길이에 따라오는 오른쪽 마진 정해주기
+    switch (noteType) {
+      case "./img/Whole_note" :
+        img.style.marginRight = "8em";
+        break;
+      case "./img/Half_note" :
+        img.style.marginRight = "4em";
+        break;
+      case "./img/Quarter_note" :
+        img.style.marginRight = "2em";
+        break;
+      case "./img/Eighth_note" :
+        img.style.marginRight = "1em";
+        break;
+      default: // Sixteenth_note
+        if(71 <= midiNumber){
+          img.style.marginRight = "0.8em"
+        }else{
+          img.style.marginRight = "0em";
+        }
+    }
+    span.appendChild(img);
+    musicNotePrintSpan.appendChild(span);
+  }
+
+  recordNotes = (midiNumbers, duration, noteType) => {
+    
+    if (this.props.recording.mode !== "RECORDING") {
+      return;
+    }
+    const newEvents = midiNumbers.map((midiNumber) => {
+      this.paintNote(midiNumber, noteType);
+      
+      const toBeReturned = {
+        midiNumber,
+        time: (this.props.recording.currentTime - this.props.recording.startTime) / 1000,
+        duration,
+        noteType: noteType
       }
       
-      span.appendChild(img);
-      musicNotePrintSpan.appendChild(span);
-
-      return {
-        midiNumber,
-        time: (this.props.recording.currentTime - this.props.recording.startTime)/1000,
-        duration,
-        noteType: noteType.slice(6)
-      };
+      localStorage.setItem("events", JSON.stringify(this.props.recording.events.concat(toBeReturned)))
+      return toBeReturned;
     });
     this.props.setRecording({
       events: this.props.recording.events.concat(newEvents),
       currentTime: this.props.recording.currentTime + duration
     });
   };
+
+  loadNotes = () => {
+    const currentlyPaintedNotes = localStorage.getItem("events");
+    if (currentlyPaintedNotes) {
+      const parsedList = JSON.parse(currentlyPaintedNotes);
+      parsedList.map(item => {
+        console.log(item);
+        this.paintNote(item.midiNumber, item.noteType);
+      })
+    }
+  }
 
   render() {
     const {
@@ -307,6 +328,7 @@ class PianoWithRecording extends React.Component {
           activeNotes={activeNotes}
           {...pianoProps}
         />
+        {window.onload=this.loadNotes}
       </div>
     );
   }

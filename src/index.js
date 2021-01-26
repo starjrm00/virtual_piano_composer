@@ -40,8 +40,8 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.scheduledEvents = [];
+    this.child = React.createRef();
   }
 
   getRecordingEndTime = () => {
@@ -81,7 +81,6 @@ class App extends React.Component {
         }, time * 1000)
       );
     });
-    console.log(this.state.recording)
     // Stop at the end
     setTimeout(() => {
       this.onClickStop();
@@ -99,6 +98,7 @@ class App extends React.Component {
   };
 
   onClickClear = () => {
+    localStorage.removeItem("events");
     const span = document.querySelector(".musicNotePrint");
     while (span.firstChild){
       span.removeChild(span.firstChild);
@@ -119,8 +119,21 @@ class App extends React.Component {
     FileSaver.saveAs(blob, "real_tmp.txt");
   };
 
+  paintNote = (midiNumber, noteType) => {
+    this.child.current.paintNote(midiNumber, noteType);
+  }
+  paintAllNoteOfInputFile = () => {
+    let midiNumber, noteType;
+    this.state.recording.events.map(item => {
+      midiNumber = item.midiNumber;
+      noteType = item.noteType;
+      this.paintNote(midiNumber, noteType);
+    });
+  }
   onFileInput = async (e) => {
     e.preventDefault();
+    this.onClickClear();
+
     const fr = new FileReader();
     fr.onload = async (e) => {
       const musicInString = (e.target.result);
@@ -128,6 +141,7 @@ class App extends React.Component {
         ...this.state.recording,
         events: JSON.parse(musicInString)
       })
+      this.paintAllNoteOfInputFile();
       this.onClickPlay();
     };
     fr.readAsText(e.target.files[0]);
@@ -152,9 +166,21 @@ class App extends React.Component {
     })
   }
 
+  // loadNotes = () => {
+  //   const currentlyPaintedNotes = localStorage.getItem("events");
+  //   const parsedList = JSON.parse(currentlyPaintedNotes);
+  //   if (parsedList){
+  //     parsedList.map(item => {
+  //       console.log(item);
+  //       this.paintNote(item.midiNumber, item.noteType);
+  //     })
+  //   }
+  // }
+
   render() {
     return (
       <div>
+        {/* {window.onload=this.loadNotes} */}
         <h1 className="h3">react-piano recording + playback demo</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
@@ -205,6 +231,7 @@ class App extends React.Component {
             hostname={soundfontHostname}
             render={({ isLoading, playNote, stopNote }) => (
               <PianoWithRecording
+                ref={this.child}
                 recording={this.state.recording}
                 setRecording={this.setRecording}
                 noteRange={noteRange}
@@ -229,6 +256,8 @@ class App extends React.Component {
         <div className="mt-5">
           <strong>Recorded notes</strong>
           <div>{JSON.stringify(this.state.recording.events)}</div>
+          {/* {localStorage.setItem("events", JSON.stringify(this.state.recording.events))} */}
+          
         </div>
       </div>
     );
