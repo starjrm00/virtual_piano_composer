@@ -31,6 +31,8 @@ class App extends React.Component {
       currentTime: 0,
       currentEvents: [],
       startTime: Date.now(),
+      last_push: 0,
+      now_pushed: 0,
       selectedSound: ""
     },
     BPM: 120

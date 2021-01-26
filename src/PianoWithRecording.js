@@ -45,7 +45,7 @@ NoteHeight[82] = -4.6
 NoteHeight[83] = -5.1
 
 const BLACK_KEYS_MIDI_NUMBER = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82];
-const KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE = [50, 51, 53, 54, 57, 58, 60, 61, 81, 82];
+// const KEYS_THAT_NEEDS_LITTLE_HORIZONTAL_LINE = [50, 51, 53, 54, 57, 58, 60, 61, 81, 82];
 
 class PianoWithRecording extends React.Component {
   static defaultProps = {
@@ -105,24 +105,37 @@ class PianoWithRecording extends React.Component {
 
   onPlayNoteInput = (midiNumber) => {
     if (this.state.notesRecorded === true){
+      var now_pushed = this.props.recording.now_pushed
+      if(this.props.recording.last_push !== 0 && now_pushed === 0){
+        console.log(Date.now() - this.props.recording.last_push)
+      }
       console.log(midiNumber);
       console.log(this.props.BPM)
+      console.log(this.props.recording.now_pushed)
       this.setState({
         notesRecorded: false
       });
-      this.props.recording.currentTime = Date.now()
+      this.props.setRecording({
+        now_pushed: now_pushed+1,
+        currentTime: Date.now()
+      })
     }
   };
 
   onStopNoteInput = (midiNumber, { prevActiveNotes }) => {
     if (this.state.notesRecorded === false) {
-      
+      var now_pushed = this.props.recording.now_pushed
       this.state.noteDuration = (Date.now() - this.props.recording.currentTime)/1000
+      console.log(this.state.noteDuration)
       this.state.noteType = this.setnoteType(this.state.noteDuration);
       this.recordNotes(prevActiveNotes, this.state.noteDuration, this.state.noteType);
       this.setState({
         notesRecorded: true,
         //noteDuration: this.state.noteDuration
+      });
+      this.props.setRecording({
+        last_push: Date.now(),
+        now_pushed: now_pushed-1
       });
     }
   };
@@ -140,7 +153,7 @@ class PianoWithRecording extends React.Component {
       const img = new Image();
 
       // 꼬리 방향이 아래일 경우 위치 조정하기
-      if (midiNumber >= 71 && noteType != "./img/Whole_note"){
+      if (midiNumber >= 71 && noteType !== "./img/Whole_note"){
         img.style.top = `${NoteHeight[midiNumber]+3.15}em`;
       } else {
         img.style.top = `${NoteHeight[midiNumber]}em`;
@@ -180,7 +193,7 @@ class PianoWithRecording extends React.Component {
       // 검은 건반일 경우 앞에 샾 붙여주기 && 음표 꼬리 방향 정해주기
       isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
       if (isBlackKey) {
-        if (midiNumber >= 71 && noteType != "./img/Whole_note") {
+        if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
           img.src = require(`${noteType}_w_sharp_stem_down.png`);
           img.alt = `musical note with its stem facing down and with sharp(${noteType})`;
         } else {
@@ -188,7 +201,7 @@ class PianoWithRecording extends React.Component {
           img.alt = `musical note with sharp(${noteType})`;
         }
       } else {
-        if (midiNumber >= 71 && noteType != "./img/Whole_note") {
+        if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
           img.src = require(`${noteType}_stem_down.png`);
           img.alt = `musical note with its stem facing down(${noteType})`;
         } else {
