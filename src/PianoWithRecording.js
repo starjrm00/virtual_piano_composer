@@ -74,6 +74,33 @@ class PianoWithRecording extends React.Component {
       return "./img/Eighth_note"
     }
     return "./img/Sixteenth_note"
+    /*
+    if(duration >= 210 / this.props.BPM){
+      return "./img/Whole_note"
+    }
+    if(duration >= 150 / this.props.BPM){
+      return "./img/Half.5_note"
+    }
+    if(duration >= 105 / this.props.BPM){
+      return "./img/Half_note"
+    }
+    if(duration >= 75 / this.props.BPM){
+      return "./img/Quarter.5_note"
+    }
+    if(duration >= 52.5 / this.props.BPM){
+      return "./img/Quarter_note"
+    }
+    if(duration >= 37.5 / this.props.BPM){
+      return "./img/Eighth.5_note"
+    }
+    if(duration >= 26.25 / this.props.BPM){
+      return "./img/Eighth_note"
+    }
+    if(duration >= 18.75 / this.props.BPM){
+      return "./img/Sixteenth.5_note"
+    }
+    return "./img/Sixteenth_note"
+    */
   }
 
   onPlayNoteInput = (midiNumber) => {
