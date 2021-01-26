@@ -107,11 +107,10 @@ class PianoWithRecording extends React.Component {
     if (this.state.notesRecorded === true){
       var now_pushed = this.props.recording.now_pushed
       if(this.props.recording.last_push !== 0 && now_pushed === 0){
-        console.log(Date.now() - this.props.recording.last_push)
+        console.log((Date.now() - this.props.recording.last_push)/1000)
       }
       console.log(midiNumber);
       console.log(this.props.BPM)
-      console.log(this.props.recording.now_pushed)
       this.setState({
         notesRecorded: false
       });
@@ -126,7 +125,6 @@ class PianoWithRecording extends React.Component {
     if (this.state.notesRecorded === false) {
       var now_pushed = this.props.recording.now_pushed
       this.state.noteDuration = (Date.now() - this.props.recording.currentTime)/1000
-      console.log(this.state.noteDuration)
       this.state.noteType = this.setnoteType(this.state.noteDuration);
       this.recordNotes(prevActiveNotes, this.state.noteDuration, this.state.noteType);
       this.setState({
