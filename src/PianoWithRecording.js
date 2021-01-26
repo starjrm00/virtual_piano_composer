@@ -109,6 +109,23 @@ class PianoWithRecording extends React.Component {
       var now_pushed = this.props.recording.now_pushed
       if(this.props.recording.last_push !== 0 && now_pushed === 0){
         console.log((Date.now() - this.props.recording.last_push)/1000)
+        var rest_time = Date.now() - this.props.recording.last_push
+        if(1000 <= rest_time){
+          const musicNotePrintSpan = document.querySelector(".musicNotePrint");
+          const span = document.createElement("span");
+          const img = new Image();
+          if(4000 <= rest_time){
+
+          }else if(2000 <= rest_time){
+
+          }else{
+            img.src = require(`./img/rest-quarter-note.png`);
+            img.alt = `rest-quarter-note`;
+            img.style.marginRight = "0.7em"
+          }
+          span.appendChild(img);
+          musicNotePrintSpan.appendChild(span);
+        }
       }
       console.log(midiNumber);
       console.log(this.props.BPM)
