@@ -132,10 +132,7 @@ class PianoWithRecording extends React.Component {
       this.setState({
         notesRecorded: false
       });
-      this.props.setRecording({
-        now_pushed: now_pushed+1,
-        currentTime: Date.now()
-      })
+      this.props.recording.currentTime = Date.now()
     }
   };
 
@@ -148,10 +145,6 @@ class PianoWithRecording extends React.Component {
       this.setState({
         notesRecorded: true,
         //noteDuration: this.state.noteDuration
-      });
-      this.props.setRecording({
-        last_push: Date.now(),
-        now_pushed: now_pushed-1
       });
     }
   };
