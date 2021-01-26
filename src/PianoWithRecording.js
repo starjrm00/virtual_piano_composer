@@ -61,6 +61,7 @@ class PianoWithRecording extends React.Component {
   };
 
   setnoteType = duration => {
+    /*
     if(duration >= 180/this.props.BPM){
       return "./img/Whole_note"
     }
@@ -74,33 +75,33 @@ class PianoWithRecording extends React.Component {
       return "./img/Eighth_note"
     }
     return "./img/Sixteenth_note"
-    /*
+    */
     if(duration >= 210 / this.props.BPM){
       return "./img/Whole_note"
     }
     if(duration >= 150 / this.props.BPM){
-      return "./img/Half.5_note"
+      return "./img/Half_noteD"
     }
     if(duration >= 105 / this.props.BPM){
       return "./img/Half_note"
     }
     if(duration >= 75 / this.props.BPM){
-      return "./img/Quarter.5_note"
+      return "./img/Quarter_noteD"
     }
     if(duration >= 52.5 / this.props.BPM){
       return "./img/Quarter_note"
     }
     if(duration >= 37.5 / this.props.BPM){
-      return "./img/Eighth.5_note"
+      return "./img/Eighth_noteD"
     }
     if(duration >= 26.25 / this.props.BPM){
       return "./img/Eighth_note"
     }
     if(duration >= 18.75 / this.props.BPM){
-      return "./img/Sixteenth.5_note"
+      return "./img/Sixteenth_noteD"
     }
     return "./img/Sixteenth_note"
-    */
+    
   }
 
   onPlayNoteInput = (midiNumber) => {
@@ -149,6 +150,25 @@ class PianoWithRecording extends React.Component {
       const musicNotePrintSpan = document.querySelector(".musicNotePrint");
       const span = document.createElement("span");
       const img = new Image();
+      isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
+
+      if(noteType.slice(-1) === 'D'){
+        const dot = document.createElement("span");
+        dot.style.position = "absolute";
+	      dot.style.backgroundColor = "rgb(59, 59, 59)";
+	      dot.style.borderRadius = "10px";
+	      dot.style.height = "3px";
+        dot.style.width = "3px";
+        if(isBlackKey){
+          dot.style.left = "4.7em";
+        }else{
+          dot.style.left = "4.4em";
+        }
+        dot.style.top = `${NoteHeight[midiNumber]-2.4}em`;
+        span.appendChild(dot)
+        console.log(noteType.slice(0, -1))
+        noteType = noteType.slice(0, -1)
+      }
 
       // 꼬리 방향이 아래일 경우 위치 조정하기
       if (midiNumber >= 71 && noteType !== "./img/Whole_note"){
@@ -189,7 +209,6 @@ class PianoWithRecording extends React.Component {
         span.appendChild(line);
       }
       // 검은 건반일 경우 앞에 샾 붙여주기 && 음표 꼬리 방향 정해주기
-      isBlackKey = BLACK_KEYS_MIDI_NUMBER.includes(midiNumber);
       if (isBlackKey) {
         if (midiNumber >= 71 && noteType !== "./img/Whole_note") {
           img.src = require(`${noteType}_w_sharp_stem_down.png`);
