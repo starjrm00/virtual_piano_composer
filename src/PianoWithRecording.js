@@ -60,21 +60,6 @@ class PianoWithRecording extends React.Component {
   };
 
   setnoteType = duration => {
-    /*
-    if(duration >= 180/this.props.BPM){
-      return "./img/Whole_note"
-    }
-    if(duration >= 90/this.props.BPM){
-      return "./img/Half_note"
-    }
-    if(duration >= 45/this.props.BPM){
-      return "./img/Quarter_note"
-    }
-    if(duration >= 22.5/this.props.BPM){
-      return "./img/Eighth_note"
-    }
-    return "./img/Sixteenth_note"
-    */
     if(duration >= 210 / this.props.BPM){
       return "./img/Whole_note"
     }
@@ -137,7 +122,7 @@ class PianoWithRecording extends React.Component {
         notesRecorded: false
       });
       this.props.recording.currentTime = Date.now()
-      this.props.recording.now_pushed = now_pushed+1
+      this.props.recording.now_pushed = now_pushed + 1
     }
   };
 
