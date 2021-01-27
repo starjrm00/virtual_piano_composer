@@ -23,6 +23,8 @@ const keyboardShortcuts = KeyboardShortcuts.create({
   keyboardConfig: KeyboardShortcuts.BOTTOM_ROW.concat(KeyboardShortcuts.QWERTY_ROW)
 });
 
+let timeout_ret = "NONE"
+
 class App extends React.Component {
   state = {
     recording: {
@@ -60,6 +62,7 @@ class App extends React.Component {
   };
 
   onClickPlay = () => {
+    this.onClickStop()
     this.setRecording({
       mode: "PLAYING"
     });
@@ -82,7 +85,7 @@ class App extends React.Component {
       );
     });
     // Stop at the end
-    setTimeout(() => {
+    timeout_ret = setTimeout(() => {
       this.onClickStop();
     }, this.getRecordingEndTime() * 1000);
   };
@@ -91,6 +94,11 @@ class App extends React.Component {
     this.scheduledEvents.forEach((scheduledEvent) => {
       clearTimeout(scheduledEvent);
     });
+    console.log(timeout_ret)
+    if(timeout_ret != "NONE"){
+      clearTimeout(timeout_ret)
+      timeout_ret = "NONE"
+    }
     this.setRecording({
       mode: "RECORDING",
       currentEvents: []
@@ -109,6 +117,8 @@ class App extends React.Component {
       mode: "RECORDING",
       currentEvents: [],
       currentTime: 0,
+      last_push: 0,
+      now_pushed: 0,
       startTime: Date.now()
     });
   };
