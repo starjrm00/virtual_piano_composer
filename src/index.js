@@ -137,12 +137,16 @@ class App extends React.Component {
     const fr = new FileReader();
     fr.onload = async (e) => {
       const musicInString = (e.target.result);
-      this.setRecording({
-        ...this.state.recording,
-        events: JSON.parse(musicInString)
-      })
+      this.setState({
+        ...this.state,
+        recording: {
+          ...this.state.recording,
+          events: JSON.parse(musicInString)
+        }
+      });
       this.paintAllNoteOfInputFile();
       this.onClickPlay();
+      localStorage.setItem("events", JSON.stringify(this.state.recording.events));
     };
     fr.readAsText(e.target.files[0]);
   }
@@ -166,21 +170,9 @@ class App extends React.Component {
     })
   }
 
-  // loadNotes = () => {
-  //   const currentlyPaintedNotes = localStorage.getItem("events");
-  //   const parsedList = JSON.parse(currentlyPaintedNotes);
-  //   if (parsedList){
-  //     parsedList.map(item => {
-  //       console.log(item);
-  //       this.paintNote(item.midiNumber, item.noteType);
-  //     })
-  //   }
-  // }
-
   render() {
     return (
       <div>
-        {/* {window.onload=this.loadNotes} */}
         <h1 className="h3">react-piano recording + playback demo</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
@@ -256,8 +248,6 @@ class App extends React.Component {
         <div className="mt-5">
           <strong>Recorded notes</strong>
           <div>{JSON.stringify(this.state.recording.events)}</div>
-          {/* {localStorage.setItem("events", JSON.stringify(this.state.recording.events))} */}
-          
         </div>
       </div>
     );
