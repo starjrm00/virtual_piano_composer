@@ -262,10 +262,6 @@ class App extends React.Component {
             <Form.File.Input type="file" onChange={this.onFileInput}/>
           </Form>
         </div>
-        <div className="mt-5">
-          <strong>Recorded notes</strong>
-          <div>{JSON.stringify(this.state.recording.events)}</div>
-        </div>
       </div>
     );
   }
