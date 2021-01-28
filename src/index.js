@@ -38,9 +38,9 @@ class App extends React.Component {
       currentEvents: [],
       startTime: Date.now(),
       last_push: 0,
-      now_pushed: 0,
-      selectedSound: ""
+      now_pushed: 0
     },
+    selectedSound: "accordion",
     BPM: 120
   };
 
@@ -188,13 +188,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="h3">react-piano recording + playback demo</h1>
+        <h1 className="h3">&nbsp; &nbsp; react-piano recording + playback demo</h1>
         <div>
           <Form onSubmit={this.handleSubmit}>
             <label>
-              Pick your sound: 
+              &nbsp; &nbsp; &nbsp; Instrument: &nbsp; &nbsp;
               <select value={this.state.selectedSound} onChange={this.handleChange}>
-                <option value="">--Please choose an option--</option>
                 <option value="acoustic_grand_piano">acoustic_grand_piano</option>
                 <option value="accordion">accordion</option>
                 <option value="acoustic_bass">acoustic_bass</option>
@@ -207,14 +206,9 @@ class App extends React.Component {
                 <option value="whistle">whistle</option>
               </select>
             </label>
-            <input type="submit" value="Submit" />
-          </Form>
-
-          <Form onSubmit={this.handleSubmit}>
             <label>
-              BPM: 
+              &nbsp; &nbsp; &nbsp;BPM: &nbsp; &nbsp;
               <select value={this.state.BPM} onChange={this.handleBPM}>
-                <option value="">--choose the speed of music--</option>
                 <option value="80">80</option>
                 <option value="90">90</option>
                 <option value="100">100</option>
@@ -227,30 +221,31 @@ class App extends React.Component {
                 <option value="170">170</option>
               </select>
             </label>
-            <input type="submit" value="BPM" />
           </Form>
         </div>
 
         <div className="mt-5">
-          <SoundfontProvider
-            instrumentName={this.state.selectedSound}
-            audioContext={audioContext}
-            hostname={soundfontHostname}
-            render={({ isLoading, playNote, stopNote }) => (
-              <PianoWithRecording
-                ref={this.child}
-                recording={this.state.recording}
-                setRecording={this.setRecording}
-                noteRange={noteRange}
-                width={1000}
-                playNote={playNote}
-                stopNote={stopNote}
-                disabled={isLoading}
-                BPM={this.state.BPM}
-                keyboardShortcuts={keyboardShortcuts}
-              />
-            )}
-          />
+          <div style={{margin: window.innerWidth*0.02}}>
+            <SoundfontProvider
+              instrumentName={this.state.selectedSound}
+              audioContext={audioContext}
+              hostname={soundfontHostname}
+              render={({ isLoading, playNote, stopNote }) => (
+                <PianoWithRecording
+                  ref={this.child}
+                  recording={this.state.recording}
+                  setRecording={this.setRecording}
+                  noteRange={noteRange}
+                  width={window.innerWidth*0.95}
+                  playNote={playNote}
+                  stopNote={stopNote}
+                  disabled={isLoading}
+                  BPM={this.state.BPM}
+                  keyboardShortcuts={keyboardShortcuts}
+                />
+              )}
+            />
+          </div>
         </div>
         <MusicPaper/>
         <div className="mt-5">
