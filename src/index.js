@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import _, { endsWith, reject } from "lodash";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import SoundfontProvider from "./SoundfontProvider";
 import PianoWithRecording from "./PianoWithRecording";
@@ -96,7 +100,7 @@ class App extends React.Component {
       clearTimeout(scheduledEvent);
     });
     console.log(timeout_ret)
-    if(timeout_ret != "NONE"){
+    if(timeout_ret !== "NONE"){
       clearTimeout(timeout_ret)
       timeout_ret = "NONE"
     }
@@ -186,7 +190,7 @@ class App extends React.Component {
       <div>
         <h1 className="h3">react-piano recording + playback demo</h1>
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             <label>
               Pick your sound: 
               <select value={this.state.selectedSound} onChange={this.handleChange}>
@@ -204,9 +208,9 @@ class App extends React.Component {
               </select>
             </label>
             <input type="submit" value="Submit" />
-          </form>
+          </Form>
 
-          <form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             <label>
               BPM: 
               <select value={this.state.BPM} onChange={this.handleBPM}>
@@ -224,7 +228,7 @@ class App extends React.Component {
               </select>
             </label>
             <input type="submit" value="BPM" />
-          </form>
+          </Form>
         </div>
 
         <div className="mt-5">
@@ -250,11 +254,13 @@ class App extends React.Component {
         </div>
         <MusicPaper/>
         <div className="mt-5">
-          <button onClick={this.onClickPlay}>Play</button>
-          <button onClick={this.onClickStop}>Stop</button>
-          <button onClick={this.onClickClear}>Clear</button>
-          <button onClick={this.onClickSave}>Save</button>
-          <input type="file" onChange={this.onFileInput}/>
+          <Button onClick={this.onClickPlay}>Play</Button>{' '}
+          <Button onClick={this.onClickStop}>Stop</Button>{' '}
+          <Button onClick={this.onClickClear}>Clear</Button>{' '}
+          <Button onClick={this.onClickSave}>Save</Button>{' '}
+          <Form>
+            <Form.File.Input type="file" onChange={this.onFileInput}/>
+          </Form>
         </div>
         <div className="mt-5">
           <strong>Recorded notes</strong>
