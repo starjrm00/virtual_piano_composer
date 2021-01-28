@@ -1,3 +1,14 @@
+.title{
+	margin: 2em;
+	text-align: center;
+	color:rgb(66, 66, 66);
+	letter-spacing: -1px;
+}
+.emoji{
+	font-size: xx-large;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+}
 .musicPaperContainer {
   /* background-color: cornsilk; */
 	position: relative;

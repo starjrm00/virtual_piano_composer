@@ -192,7 +192,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="h3">&nbsp; &nbsp; react-piano recording + playback demo</h1>
+        <h1 className="title">
+          <span className="emoji">🎹</span>
+          Keyboard Piano
+          <span className="emoji">🎹</span>
+        </h1>
         <div>
           <Form onSubmit={this.handleSubmit}>
             <label>
