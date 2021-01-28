@@ -198,10 +198,10 @@ class App extends React.Component {
           <span className="emoji">🎹</span>
         </h1>
         <div>
-          <Form onSubmit={this.handleSubmit}>
-            <label>
-              &nbsp; &nbsp; &nbsp; Instrument: &nbsp; &nbsp;
-              <select value={this.state.selectedSound} onChange={this.handleChange}>
+          <Form>
+            <Form.Group controlId="CustomSelect">
+              <Form.Label>&nbsp; &nbsp; Instrument</Form.Label>
+              <Form.Control as="select" custom onChange={this.handleChange}>
                 <option value="acoustic_grand_piano">acoustic_grand_piano</option>
                 <option value="accordion">accordion</option>
                 <option value="acoustic_bass">acoustic_bass</option>
@@ -212,11 +212,9 @@ class App extends React.Component {
                 <option value="piccolo">piccolo</option>
                 <option value="voice_oohs">voice_oohs</option>
                 <option value="whistle">whistle</option>
-              </select>
-            </label>
-            <label>
-              &nbsp; &nbsp; &nbsp;BPM: &nbsp; &nbsp;
-              <select value={this.state.BPM} onChange={this.handleBPM}>
+              </Form.Control>
+              <Form.Label>&nbsp; &nbsp; BPM</Form.Label>
+              <Form.Control as="select" custom onChange={this.handleBPM}>
                 <option value="80">80</option>
                 <option value="90">90</option>
                 <option value="100">100</option>
@@ -227,8 +225,8 @@ class App extends React.Component {
                 <option value="150">150</option>
                 <option value="160">160</option>
                 <option value="170">170</option>
-              </select>
-            </label>
+              </Form.Control>
+            </Form.Group>
           </Form>
         </div>
 
