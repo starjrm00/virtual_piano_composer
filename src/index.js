@@ -5,6 +5,8 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -163,7 +165,9 @@ class App extends React.Component {
       this.onClickPlay();
       localStorage.setItem("events", JSON.stringify(this.state.recording.events));
     };
-    fr.readAsText(e.target.files[0]);
+    if (e.target.files[0]){
+      fr.readAsText(e.target.files[0]);
+    }
   }
 
   handleChange = (e) => {
@@ -259,7 +263,14 @@ class App extends React.Component {
           <Button onClick={this.onClickClear}>Clear</Button>{' '}
           <Button onClick={this.onClickSave}>Save</Button>{' '}
           <Form>
-            <Form.File.Input type="file" onChange={this.onFileInput}/>
+            <Form.Row>
+              <Col xs={4}>
+                <Form.File
+                  type="file"
+                  onChange={this.onFileInput}
+                />
+              </Col>
+            </Form.Row>
           </Form>
         </div>
       </div>
