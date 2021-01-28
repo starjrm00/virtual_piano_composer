@@ -198,9 +198,9 @@ class App extends React.Component {
           <span className="emoji">🎹</span>
         </h1>
         <div>
-          <Form>
+          <Form inline>
             <Form.Group controlId="CustomSelect">
-              <Form.Label>&nbsp; &nbsp; Instrument</Form.Label>
+              <Form.Label>&nbsp; &nbsp; Instrument &nbsp; &nbsp; &nbsp;</Form.Label>
               <Form.Control as="select" custom onChange={this.handleChange}>
                 <option value="acoustic_grand_piano">acoustic_grand_piano</option>
                 <option value="accordion">accordion</option>
@@ -213,7 +213,7 @@ class App extends React.Component {
                 <option value="voice_oohs">voice_oohs</option>
                 <option value="whistle">whistle</option>
               </Form.Control>
-              <Form.Label>&nbsp; &nbsp; BPM</Form.Label>
+              <Form.Label>&nbsp; &nbsp; BPM &nbsp; &nbsp; &nbsp;</Form.Label>
               <Form.Control as="select" custom onChange={this.handleBPM}>
                 <option value="80">80</option>
                 <option value="90">90</option>
