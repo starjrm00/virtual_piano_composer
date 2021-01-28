@@ -44,6 +44,7 @@ class App extends React.Component {
     super(props);
     this.scheduledEvents = [];
     this.child = React.createRef();
+    this.state.recording.events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem("events")) : []
   }
 
   getRecordingEndTime = () => {
@@ -126,7 +127,7 @@ class App extends React.Component {
   onClickSave = () => {
     const tmp = JSON.stringify(this.state.recording.events);
     const blob = new Blob([tmp]);
-    FileSaver.saveAs(blob, "real_tmp.txt");
+    FileSaver.saveAs(blob, "your_music_sheet.txt");
   };
 
   paintNote = (midiNumber, noteType) => {

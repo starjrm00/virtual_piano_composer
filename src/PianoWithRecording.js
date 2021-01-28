@@ -47,6 +47,7 @@ NoteHeight[83] = -5.1
 const BLACK_KEYS_MIDI_NUMBER = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82];
 
 class PianoWithRecording extends React.Component {
+
   static defaultProps = {
     notesRecorded: false,
     BPM: 120
@@ -255,7 +256,6 @@ class PianoWithRecording extends React.Component {
   }
 
   recordNotes = (midiNumbers, duration, noteType) => {
-    
     if (this.props.recording.mode !== "RECORDING") {
       return;
     }
@@ -272,6 +272,7 @@ class PianoWithRecording extends React.Component {
       localStorage.setItem("events", JSON.stringify(this.props.recording.events.concat(toBeReturned)))
       return toBeReturned;
     });
+    
     this.props.setRecording({
       events: this.props.recording.events.concat(newEvents),
       currentTime: this.props.recording.currentTime + duration
@@ -283,7 +284,6 @@ class PianoWithRecording extends React.Component {
     if (currentlyPaintedNotes) {
       const parsedList = JSON.parse(currentlyPaintedNotes);
       parsedList.map(item => {
-        console.log(item);
         this.paintNote(item.midiNumber, item.noteType);
       })
     }
