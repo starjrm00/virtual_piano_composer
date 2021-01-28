@@ -181,6 +181,11 @@ class App extends React.Component {
       localStorage.setItem("events", JSON.stringify(this.state.recording.events));
     };
     if (e.target.files[0]){
+      if (e.target.files[0].name.split('.').pop() !== 'txt'){
+        alert("이 사이트에서 저장했던 악보 중 하나를 선택해 주세요. 😊");
+        e.target.value = null;
+        return;
+      }
       fr.readAsText(e.target.files[0]);
     }
   }
@@ -245,10 +250,10 @@ class App extends React.Component {
           </Form>
         </div>
         <div className="btnsContainer">
-          <Button onClick={this.onClickPlay} variant="outline-primary">PLAY 💙</Button>{' '}
-          <Button onClick={this.onClickStop} variant="outline-warning">STOP 🟨</Button>{' '}
-          <Button onClick={this.onClickClear} variant="outline-danger">CLEAR & REC 🔴</Button>{' '}
-          <Button onClick={this.onClickSave} variant="outline-info">SAVE ✔</Button>{' '}
+          <Button onClick={this.onClickPlay} variant="outline-primary">PLAY 💙</Button>
+          <Button onClick={this.onClickStop} variant="outline-warning">STOP 🟨</Button>
+          <Button onClick={this.onClickClear} variant="outline-danger">CLEAR & REC 🔴</Button>
+          <Button onClick={this.onClickSave} variant="outline-info">SAVE ✔</Button>
         </div>
         <div className="fileInputContainer">
           <Form>
