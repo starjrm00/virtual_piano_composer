@@ -55,7 +55,7 @@ class App extends React.Component {
       last_push: 0,
       now_pushed: 0
     },
-    selectedSound: "accordion",
+    selectedSound: "acoustic_grand_piano",
     BPM: 120,
     pianoWidth: 0
   };
@@ -130,7 +130,7 @@ class App extends React.Component {
   onClickClear = () => {
     localStorage.removeItem("events");
     const span = document.querySelector(".musicNotePrint");
-    while (span.firstChild){
+    while (span.firstChild) {
       span.removeChild(span.firstChild);
     }
     this.onClickStop();
@@ -252,7 +252,7 @@ class App extends React.Component {
         </div>
         <div className="fileInputContainer">
           <Form>
-            <Form.File type="file" onChange={this.onFileInput} />
+            <Form.File type="file" onChange={this.onFileInput} onClick={(e) => {e.target.value=null}}/>
           </Form>
         </div>
         <div className="mt-5">
