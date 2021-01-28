@@ -1,5 +1,5 @@
 .title{
-	margin: 2em;
+	margin: 1em;
 	text-align: center;
 	color:rgb(66, 66, 66);
 	letter-spacing: -1px;
@@ -9,25 +9,39 @@
 	margin-left: 0.3em;
 	margin-right: 0.3em;
 }
+.btnsContainer{
+	text-align: center;
+}
+Button{
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+}
+.fileInputContainer{
+  width: 15em;
+  margin: 2em auto;
+}
 .musicPaperContainer {
   /* background-color: cornsilk; */
 	position: relative;
-	height: 21em;
+	height: 17em;
 	overflow: scroll;
 	overflow-y: hidden;
-	white-space:nowrap;
+	white-space: nowrap;
 }
 .five-lines {
-  /* background-color: white; */
+  /* background-color: white;def */
   position: relative;
-  top: 6em;
+  top: 3em;
 }
 .treble-clef {
-  position: absolute;
+	position: absolute;
+	top: -1em;
+	left: 1em;
   width: 2.2em;
 }
 .musicNotePrint {
 	position: absolute;
+	left: 2em;
 }
 .musicNotePrint > span {
 	position: relative;

@@ -6,7 +6,7 @@ import "react-piano/dist/styles.css";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
-
+import Container from 'react-bootstrap/Container';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -32,6 +32,19 @@ const keyboardShortcuts = KeyboardShortcuts.create({
 let timeout_ret = "NONE"
 
 class App extends React.Component {
+  componentDidMount(){
+    window.addEventListener("resize", this.updatePianoWidth);
+  }
+  componentWillUnmount(){
+    window.removeEventListener("resize", this.updatePianoWidth);
+  }
+  updatePianoWidth = () =>{
+    this.setState({
+      ...this.state,
+      pianoWidth: Math.round(window.innerWidth * 0.9)
+    })
+  }
+  
   state = {
     recording: {
       mode: "RECORDING",
@@ -43,13 +56,15 @@ class App extends React.Component {
       now_pushed: 0
     },
     selectedSound: "accordion",
-    BPM: 120
+    BPM: 120,
+    pianoWidth: 0
   };
 
   constructor(props) {
     super(props);
     this.scheduledEvents = [];
     this.child = React.createRef();
+    this.state.pianoWidth = Math.round(window.innerWidth * 0.9);
     this.state.recording.events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem("events")) : []
   }
 
@@ -200,7 +215,7 @@ class App extends React.Component {
         <div>
           <Form inline>
             <Form.Group controlId="CustomSelect">
-              <Form.Label>&nbsp; &nbsp; Instrument &nbsp; &nbsp; &nbsp;</Form.Label>
+              <Form.Label><strong>&nbsp; &nbsp; Instrument &nbsp; &nbsp;</strong></Form.Label>
               <Form.Control as="select" custom onChange={this.handleChange}>
                 <option value="acoustic_grand_piano">acoustic_grand_piano</option>
                 <option value="accordion">accordion</option>
@@ -213,7 +228,7 @@ class App extends React.Component {
                 <option value="voice_oohs">voice_oohs</option>
                 <option value="whistle">whistle</option>
               </Form.Control>
-              <Form.Label>&nbsp; &nbsp; BPM &nbsp; &nbsp; &nbsp;</Form.Label>
+              <Form.Label><strong>&nbsp; &nbsp; &nbsp; BPM &nbsp; &nbsp;</strong></Form.Label>
               <Form.Control as="select" custom onChange={this.handleBPM}>
                 <option value="80">80</option>
                 <option value="90">90</option>
@@ -229,9 +244,19 @@ class App extends React.Component {
             </Form.Group>
           </Form>
         </div>
-
+        <div className="btnsContainer">
+          <Button onClick={this.onClickPlay} variant="outline-primary">PLAY 💙</Button>{' '}
+          <Button onClick={this.onClickStop} variant="outline-warning">STOP 🟨</Button>{' '}
+          <Button onClick={this.onClickClear} variant="outline-danger">CLEAR & REC 🔴</Button>{' '}
+          <Button onClick={this.onClickSave} variant="outline-info">SAVE ✔</Button>{' '}
+        </div>
+        <div className="fileInputContainer">
+          <Form>
+            <Form.File type="file" onChange={this.onFileInput} />
+          </Form>
+        </div>
         <div className="mt-5">
-          <div style={{margin: window.innerWidth*0.02}}>
+          <div style={{marginLeft: "5%", marginRight: "5%"}}>
             <SoundfontProvider
               instrumentName={this.state.selectedSound}
               audioContext={audioContext}
@@ -242,7 +267,7 @@ class App extends React.Component {
                   recording={this.state.recording}
                   setRecording={this.setRecording}
                   noteRange={noteRange}
-                  width={window.innerWidth*0.95}
+                  width={this.state.pianoWidth}
                   playNote={playNote}
                   stopNote={stopNote}
                   disabled={isLoading}
@@ -254,22 +279,6 @@ class App extends React.Component {
           </div>
         </div>
         <MusicPaper/>
-        <div className="mt-5">
-          <Button onClick={this.onClickPlay}>Play</Button>{' '}
-          <Button onClick={this.onClickStop}>Stop</Button>{' '}
-          <Button onClick={this.onClickClear}>Clear</Button>{' '}
-          <Button onClick={this.onClickSave}>Save</Button>{' '}
-          <Form>
-            <Form.Row>
-              <Col xs={4}>
-                <Form.File
-                  type="file"
-                  onChange={this.onFileInput}
-                />
-              </Col>
-            </Form.Row>
-          </Form>
-        </div>
       </div>
     );
   }

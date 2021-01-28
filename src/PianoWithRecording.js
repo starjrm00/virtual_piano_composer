@@ -305,14 +305,14 @@ class PianoWithRecording extends React.Component {
         : null;
     return (
       <div>
-        <Piano
-          playNote={this.props.playNote}
-          stopNote={this.props.stopNote}
-          onPlayNoteInput={this.onPlayNoteInput}
-          onStopNoteInput={this.onStopNoteInput}
-          activeNotes={activeNotes}
-          {...pianoProps}
-        />
+          <Piano
+            playNote={this.props.playNote}
+            stopNote={this.props.stopNote}
+            onPlayNoteInput={this.onPlayNoteInput}
+            onStopNoteInput={this.onStopNoteInput}
+            activeNotes={activeNotes}
+            {...pianoProps}
+          />
         {window.onload=this.loadNotes}
       </div>
     );
