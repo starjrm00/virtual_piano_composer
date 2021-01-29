@@ -148,7 +148,7 @@ class App extends React.Component {
   onClickSave = () => {
     const tmp = JSON.stringify(this.state.recording.events);
     const blob = new Blob([tmp]);
-    FileSaver.saveAs(blob, "your_music_sheet.txt");
+    FileSaver.saveAs(blob, "your_music_sheet.VP");
   };
 
   paintNote = (midiNumber, noteType) => {
@@ -181,7 +181,7 @@ class App extends React.Component {
       localStorage.setItem("events", JSON.stringify(this.state.recording.events));
     };
     if (e.target.files[0]){
-      if (e.target.files[0].name.split('.').pop() !== 'txt'){
+      if (e.target.files[0].name.split('.').pop() !== 'VP'){
         alert("이 사이트에서 저장했던 악보 중 하나를 선택해 주세요. 😊");
         e.target.value = null;
         return;
