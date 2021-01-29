@@ -49,8 +49,8 @@ Button{
 .musicNotePrint > span > img {
 	height: 4.2em;
 	position: relative;
-  left: 3em;
-  margin-bottom: 10em;
+	left: 3em;
+	margin-bottom: 10em;
 }
 hr {
 	border-top: 1px solid black;
