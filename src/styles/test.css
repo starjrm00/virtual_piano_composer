@@ -52,6 +52,9 @@ Button{
   left: 3em;
   margin-bottom: 10em;
 }
+hr {
+	border-top: 1px solid black;
+}
 .horizontal-line {
 	position: absolute;
 	background-color: rgb(59, 59, 59);
