@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+# React로 웹서비스 만들어 보기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Mad Camp(2020-winter) 넷째 주 프로젝트
 
-## Available Scripts
+**데모버전:** [https://starjrm00.github.io/virtual_piano_composer/](https://starjrm00.github.io/virtual_piano_composer/)
 
-In the project directory, you can run:
+### 1. 프로젝트 이름
 
-### `yarn start`
+Virtual_piano_composer
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 2. 기능 설명
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+요약: React를 이용해, 컴퓨터 키보드로 피아노를 연주하며 음표가 찍히는 서비스 구현.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 피아노 각 건반에 할당된 키보드 버튼을 누르거나, 피아노 건반을 클릭해 해당 음을 연주 가능
+- 피아노 연주 시 연주 시간에 따른 음표가 악보에 표기
+- 표기된 악보는 JSON형식의 VP파일로 저장 가능 (VP파일은 virtual_piano의 약자로 본 프로그램의 악보를 뜻하는 확장자)
+- 저장된 악보를 앱에 업로드 해 악보로 보고, 연주 듣기도 가능
+- 페이지를 새로고침 해도 악보는 계속 저장되어있음
+- 연주되는 악기의 종류 선택 가능
+- BPM선택이 가능, 그려지는 악보는 해당 BPM을 기준으로 그려짐
+- 그려진 악보에 기반한 연주를 재생, 정지 가능
