@@ -12,6 +12,10 @@ Virtual_piano_composer
 
 #### 요약: React를 이용해, 컴퓨터 키보드로 피아노를 연주하며 음표가 찍히는 서비스 구현.
 
+
+![scenario](https://user-images.githubusercontent.com/18097984/106758088-7465cc00-6674-11eb-8c12-9d6b20702ab4.gif)
+
+
 - 피아노 각 건반에 할당된 키보드 버튼을 누르거나, 피아노 건반을 클릭해 해당 음을 연주 가능
 - 피아노 연주 시 연주 시간에 따른 음표가 악보에 표기
 - 표기된 악보는 JSON형식의 VP파일로 저장 가능 (VP파일은 virtual_piano의 약자로 본 프로그램의 악보를 뜻하는 확장자)
