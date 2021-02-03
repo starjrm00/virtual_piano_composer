@@ -1,6 +1,6 @@
 # React로 웹서비스 만들어 보기
 
-## Mad Camp(2020-winter) 넷째 주 프로젝트
+#### Mad Camp(2020-winter) 넷째 주 프로젝트
 
 **데모버전:** [https://starjrm00.github.io/virtual_piano_composer/](https://starjrm00.github.io/virtual_piano_composer/)
 
@@ -10,7 +10,7 @@ Virtual_piano_composer
 
 ### 2. 기능 설명
 
-요약: React를 이용해, 컴퓨터 키보드로 피아노를 연주하며 음표가 찍히는 서비스 구현.
+#### 요약: React를 이용해, 컴퓨터 키보드로 피아노를 연주하며 음표가 찍히는 서비스 구현.
 
 - 피아노 각 건반에 할당된 키보드 버튼을 누르거나, 피아노 건반을 클릭해 해당 음을 연주 가능
 - 피아노 연주 시 연주 시간에 따른 음표가 악보에 표기
