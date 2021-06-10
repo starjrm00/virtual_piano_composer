@@ -257,7 +257,7 @@ class App extends React.Component {
         </div>
         <div className="fileInputContainer">
           <Form>
-            <Form.File type="file" onChange={this.onFileInput} onClick={(e) => {e.target.value=null}}/>
+            <Form.File accept=".VP" type="file" onChange={this.onFileInput} onClick={(e) => {e.target.value=null}}/>
           </Form>
         </div>
         <div className="mt-5">
